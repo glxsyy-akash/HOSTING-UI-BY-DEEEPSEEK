@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Status Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="time-display" id="timeDisplay">5:45</div>
+            <div class="terminal-output" id="terminalOutput">
+                <div class="terminal-line">Requirement already satisfied: time-set-normalized -2 in ./local/lib/python3.12/site-packages (from requests) (3.4.1)</div>
+                <div class="terminal-line">Requirement already satisfied: idna<4,>=2.5 in ./local/lib/python3.12/site-packages (from requests) (3.10)</div>
+                <div class="terminal-line">Requirement already satisfied: urllib3<3,>=1.21.1 in ./local/lib/python3.12/site-packages (from requests) (2.3.0)</div>
+                <div class="terminal-line">Requirement already satisfied: certifi>=2017.4.17 in ./local/lib/python3.12/site-packages (from requests) (2025.1.31)</div>
+                <div class="terminal-line notice">[notice] A new release of pip is available: 24.3.1 -> 25.0.1</div>
+                <div class="terminal-line notice">[notice] To update, run: pip install --upgrade pip</div>
+                <div class="terminal-line warning">/home/container/info.py:33: DeprecationWarning: datetime.datetime.utcfrontimestamp() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.fromtimestamp(timestamp, datetime.UTC). dt = datetime.utcfrontimestamp(int(timestamp)).replace(tzinfo=pytz.utc).astimezone(kolkata_tz)</div>
+            </div>
+            <div class="command-input">
+                <span class="prompt">Type a command...</span>
+                <input type="text" id="commandInput" autocomplete="off">
+            </div>
+        </header>
+
+        <main>
+            <div class="status-grid">
+                <div class="status-card">
+                    <h3>Address</h3>
+                    <div class="status-value" id="serverAddress">pnode-01.rhosting.eu:7808</div>
+                    <h3>Uptime</h3>
+                    <div class="status-value" id="uptime">14h 1m 36s</div>
+                </div>
+
+                <div class="status-card">
+                    <h3>CPU Load</h3>
+                    <div class="status-value" id="cpuLoad">0.05% / ∞</div>
+                    <h3>Memory</h3>
+                    <div class="status-value" id="memory">28.43 MiB / 1.95 GiB</div>
+                </div>
+
+                <div class="status-card">
+                    <h3>Disk</h3>
+                    <div class="status-value" id="disk">19.13 MiB / 5.12 GiB</div>
+                    <h3>Network (Inbound)</h3>
+                    <div class="status-value" id="networkIn">8.35 MiB</div>
+                </div>
+
+                <div class="status-card">
+                    <h3>Network (Outbound)</h3>
+                    <div class="status-value" id="networkOut">5.76 MiB</div>
+                    <h3>CPU Load</h3>
+                    <div class="status-value" id="cpuLoadDetailed">0.06%</div>
+                </div>
+            </div>
+
+            <div class="cpu-graph">
+                <h3>CPU Load</h3>
+                <div class="graph-container">
+                    <canvas id="cpuChart"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
